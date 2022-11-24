@@ -24,12 +24,19 @@ import io.restassured.specification.RequestSpecification;
 
 public class GET_TEST_CASES {
 
-	Response response;
-	RequestSpecification httpRequest;
+	public Response response;
+	public RequestSpecification httpRequest;
 	
-	ExtentReports report;
-	ExtentSparkReporter spark;
-	
+	public ExtentReports report;
+	public ExtentSparkReporter spark;
+
+	public GET_TEST_CASES() {
+		response = response;
+		httpRequest = httpRequest;
+		report = report;
+		spark = spark;
+		before_class_initialize_api();
+	}
 
 	@BeforeClass
 	public void before_class_initialize_api() {
