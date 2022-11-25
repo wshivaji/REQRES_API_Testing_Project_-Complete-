@@ -37,19 +37,25 @@ public class GET_TEST_CASES extends API_Methods_Parent_class {
 
 	@Test
 	public void TC01_api_connect_check() {
-
-		//get response body in string
-		String responseBody = response.getStatusLine();
-		System.out.println("Status Code is: "+responseBody);
-		Assert.assertEquals(responseBody, "HTTP/1.1 200 OK");
-		ExtentTest TC_01 = report.createTest("TC_01 Check API Connection using GET Method");
-		if(responseBody == "HTTP/1.1 200 OK") {
-			TC_01.log(Status.PASS, "API GET connection Success");
-			report.flush();
+		
+		try {
+			
+			//get response body in string
+			String responseBody = response.getStatusLine();
+			System.out.println("Status Code is: "+responseBody);
+			Assert.assertEquals(responseBody, "HTTP/1.1 200 OK");
+			ExtentTest TC_01 = report.createTest("TC_01 Check API Connection using GET Method");
+			if(responseBody == "HTTP/1.1 200 OK") {
+				TC_01.log(Status.PASS, "API GET connection Success");
+				report.flush();
+			}
+			else {
+				TC_01.log(Status.FAIL, "API GET connection Fail");
+				report.flush();
+			}
 		}
-		else {
-			TC_01.log(Status.FAIL, "API GET connection Fail");
-			report.flush();
+		catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 

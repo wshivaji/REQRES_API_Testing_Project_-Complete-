@@ -3,11 +3,17 @@
 <suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Test(failed)">
     <classes>
+      <class name="API_POST_TestCases.POST_Test_Cases">
+        <methods>
+          <include name="TC_02_POST_Check_Response_Text"/>
+          <include name="TC_04_POST_Check_Response_Time"/>
+        </methods>
+      </class> <!-- API_POST_TestCases.POST_Test_Cases -->
       <class name="API_GET_TestCases.GET_TEST_CASES">
         <methods>
           <include name="before_class_initialize_api"/>
-          <include name="TC05_Receive_body_as_string"/>
           <include name="TC06_Check_session_ID"/>
+          <include name="TC05_Receive_body_as_string"/>
         </methods>
       </class> <!-- API_GET_TestCases.GET_TEST_CASES -->
     </classes>
