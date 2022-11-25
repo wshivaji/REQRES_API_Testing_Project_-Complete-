@@ -2,10 +2,10 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Suite">
   <test thread-count="5" name="Test">
-  <classes>
-  	
-  	<class name="API_GET_TestCases.GET_TEST_CASES"></class>
-  </classes>
-  
+    <classes>
+      <class name="API_POST_TestCases.POST_Test_Cases"/>
+      <class name="API_GET_TestCases.GET_TEST_CASES"/>
+      <class name="API_PUT_TestCases.PUT_TestCases"/>
+    </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

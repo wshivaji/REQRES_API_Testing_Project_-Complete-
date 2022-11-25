@@ -5,7 +5,6 @@ package API_GET_TestCases;
 
 
 
-import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -16,39 +15,15 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
+import Parent_Classes.API_Methods_Parent_class;
 
-import io.restassured.RestAssured;
-import io.restassured.http.Method;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
+public class GET_TEST_CASES extends API_Methods_Parent_class {
 
-public class GET_TEST_CASES {
 
-	public Response response;
-	public RequestSpecification httpRequest;
-	
-	public ExtentReports report;
-	public ExtentSparkReporter spark;
-
-	public GET_TEST_CASES() {
-		response = response;
-		httpRequest = httpRequest;
-		report = report;
-		spark = spark;
-		before_class_initialize_api();
-	}
 
 	@BeforeClass
 	public void before_class_initialize_api() {
-		//Specify Base URI
-		RestAssured.baseURI = "https://reqres.in/api";
 
-		//Create Request Object
-		httpRequest = RestAssured.given();
-
-		//get response in console window
-		response = httpRequest.request(Method.GET, "/users?page=2");
-		
 		report  = new ExtentReports();
 		spark = new ExtentSparkReporter("Extent_Report/ExtentTestReport.html");
 		spark.config().setDocumentTitle("REST API Test Report");
@@ -95,32 +70,32 @@ public class GET_TEST_CASES {
 			report.flush();
 		}
 	}
-	
+
 	@Test
 	public void TC03_get_Complete_Response() {
-		
+
 		System.out.print("Pretty String: "+response.asPrettyString());
 		boolean empty_body = response.asPrettyString().isEmpty();
 		Assert.assertEquals(false, empty_body);
 		ExtentTest TC03= report.createTest("TC_03 Response body received contain data");
-		if (empty_body == false){
+		if (!empty_body){
 			TC03.log(Status.PASS, "API GET response contains data");
 			TC03.log(Status.INFO, response.asPrettyString());
 			report.flush();
-			
+
 		}
 		else {
 			TC03.log(Status.FAIL, "API Get response does not contain data");
 			TC03.log(Status.INFO, response.asPrettyString());
 			report.flush();
-			
+
 		}
 	}
-	
+
 	@Test
 	public void TC04_Check_Time_Received() {
-		
-		int time = (int) response.time(); 
+
+		int time = (int) response.time();
 		System.out.println("Response Time: "+response.time());
 		ExtentTest TC04 = report.createTest("TC_04 is time received");
 		if(time > 0) {
@@ -134,15 +109,15 @@ public class GET_TEST_CASES {
 			report.flush();
 		}
 	}
-	
-	
+
+
 	@Test
 	public void TC05_Receive_body_as_string() {
 		String s = response.asString();
 		boolean has_data = s.isBlank();
 		Assert.assertEquals(has_data, true);
 		ExtentTest TC05 = report.createTest("TC_05 is data converted to string");
-		if(has_data != true) {
+		if(!has_data) {
 			TC05.log(Status.PASS, "Data Converted into String successfully");
 			TC05.log(Status.INFO, "Data : "+s);
 			report.flush();
@@ -153,17 +128,17 @@ public class GET_TEST_CASES {
 			report.flush();
 		}
 	}
-	
-	
+
+
 	@Test
 	public void TC06_Check_session_ID() {
-		
+
 		System.out.println("Session Id: "+response.getSessionId());
 		String sessionID = response.getSessionId();
 		boolean has_id = sessionID.isEmpty();
 		Assert.assertEquals(has_id, true);
 		ExtentTest TC06 = report.createTest("TC_06 is Session ID Received");
-		if(has_id == true) {
+		if(has_id) {
 			TC06.log(Status.FAIL, "Session ID not Received");
 			TC06.log(Status.INFO, "Data : "+sessionID);
 			report.flush();
